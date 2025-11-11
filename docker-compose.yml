@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    container_name: perplexity-mcp-server
+    ports:
+      - "3000:3000"
+    environment:
+      - N8N_API_URL=https://n8n.srv1120261.hstgr.cloud
+      - N8N_API_KEY=${N8N_API_KEY}
+      - MCP_SERVER_PORT=3000
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
